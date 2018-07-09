@@ -1,0 +1,1 @@
+fucntion -> function funngsi2 php
