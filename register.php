@@ -12,11 +12,15 @@ if( isset($_POST['submit']) ) {
     // trim menghilangkan jarak awal dan di akhir string
     if( !empty(trim($nama)) && !empty(trim($pass)) ) {
         
-        // memasukan ke database
-        if( register_user($nama, $pass) ) {
-            echo 'Berhasil';
+        if ( register_cek_nama($nama) ) {
+            // memasukan ke database
+            if( register_user($nama, $pass) ) {
+                echo 'Berhasil';
+            } else {
+                echo 'Gagal Daftar';
+            }
         } else {
-            echo 'Gagal Daftar';
+            echo 'Nama Sudah Ada';
         }
 
     } else {

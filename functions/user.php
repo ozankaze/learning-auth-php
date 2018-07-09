@@ -23,4 +23,20 @@ function register_user($nama, $pass) {
 
 }
 
+// mengui nama kembar
+function register_cek_nama($nama) {
+    global $link;
+    $nama = mysqli_real_escape_string($link, $nama);
+
+    $query = "SELECT * FROM users WHERE username = '$nama'";
+
+    if( $result = mysqli_query($link, $query) ) {
+        if( mysqli_num_rows($result) == 0 ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
 ?>
