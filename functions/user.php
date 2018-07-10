@@ -39,6 +39,22 @@ function register_cek_nama($nama) {
     }
 }
 
+// menguji nama di database
+function login_cek_nama($nama) {
+    global $link;
+    $nama = mysqli_real_escape_string($link, $nama);
+
+    $query = "SELECT * FROM users WHERE username = '$nama'";
+
+    if( $result = mysqli_query($link, $query) ) {
+        if( mysqli_num_rows($result) != 0 ) { // jika namanya nggak kosong
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
 // cek data
 function cek_data($nama, $pass) {
     global $link;

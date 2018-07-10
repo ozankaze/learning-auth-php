@@ -12,7 +12,12 @@ if( isset($_POST['submit']) ) {
     // trim menghilangkan jarak awal dan di akhir string
     if( !empty(trim($nama)) && !empty(trim($pass)) ) {
         
-        cek_data($nama, $pass);
+        if( login_cek_nama($nama) ) {
+            die('Nama Tersedia!');
+            cek_data($nama, $pass);
+        } else {
+            echo 'Namanya Belum Terdaftar Di Database';
+        }
 
     } else {
         echo 'Nama Tidak Boleh Kosong';
