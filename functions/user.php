@@ -39,4 +39,25 @@ function register_cek_nama($nama) {
     }
 }
 
+// cek data
+function cek_data($nama, $pass) {
+    global $link;
+
+    // mencegah slq injection
+    $nama = mysqli_real_escape_string($link, $nama);
+    $pass = mysqli_real_escape_string($link, $pass);
+
+    $query = "SELECT `password` FROM `users` WHERE username = '$nama'";
+    $result = mysqli_query($link, $query);
+    // print_r($result);
+    $hash = mysqli_fetch_assoc($result); // hasilnya array mysqli_fetch_assoc()
+    // echo $hash['password'];die();
+    if( password_verify($pass, $hash['password']) ) {
+        die('Berhasil');
+    } else {
+        die('Gagal');
+    }
+
+} 
+
 ?>
