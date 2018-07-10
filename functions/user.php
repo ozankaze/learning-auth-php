@@ -70,9 +70,10 @@ function cek_data($nama, $pass) {
     // var_dump($hash);die();
     // echo $hash['password'];die();
     if( password_verify($pass, $hash['password']) ) {
-        die('Berhasil');
+        // die('Berhasil');
+        return true; 
     } else {
-        die('Gagal');
+        return false;
     }
 
 } 

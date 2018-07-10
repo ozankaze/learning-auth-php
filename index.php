@@ -9,7 +9,9 @@ if( !isset($_SESSION['user']) ) {
 
 ?>
 
-Konten
+<h1>Selamat Datang <?php echo $_SESSION['user']; ?></h1>
+
+<a href="logout.php">Logout</a>
 
 
 <?php require_once('view/footer.php') ?>
