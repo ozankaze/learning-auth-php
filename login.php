@@ -13,8 +13,12 @@ if( isset($_POST['submit']) ) {
     if( !empty(trim($nama)) && !empty(trim($pass)) ) {
         
         if( login_cek_nama($nama) ) {
-            die('Nama Tersedia!');
-            cek_data($nama, $pass);
+            if( cek_data($nama, $pass) ) {
+                $_SESSION['user'] = $nama;
+                header('Location: index.php');
+            } else {
+                echo 'data ada yang salah';
+            }
         } else {
             echo 'Namanya Belum Terdaftar Di Database';
         }
