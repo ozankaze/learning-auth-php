@@ -47,7 +47,7 @@ function login_cek_nama($nama) {
     $query = "SELECT * FROM users WHERE username = '$nama'";
 
     if( $result = mysqli_query($link, $query) ) {
-        if( mysqli_num_rows($result) != 0 ) { // jika namanya nggak kosong
+        if( mysqli_num_rows($result) != 0 ) { // jika namanya nggak kosong jika hasil ini selain 0 hasilnya true
             return true;
         } else {
             return false;
