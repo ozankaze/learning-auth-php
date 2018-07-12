@@ -19,10 +19,9 @@ if( isset($_POST['submit']) ) {
     // trim menghilangkan jarak awal dan di akhir string
     if( !empty(trim($nama)) && !empty(trim($pass)) ) {
         
-        if( login_cek_nama($nama) ) {
+        if( cek_nama($nama) != 0 ) {
             if( cek_data($nama, $pass) ) {
-                $_SESSION['user'] = $nama;
-                header('Location: index.php');
+                redirect_login($nama);
             } else {
                 $error = 'data ada yang salah';
             }

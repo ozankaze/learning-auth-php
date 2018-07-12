@@ -4,8 +4,8 @@ function register_user($nama, $pass) {
     
     global $link;
     // mencegah slq injection
-    $nama = mysqli_real_escape_string($link, $nama);
-    $pass = mysqli_real_escape_string($link, $pass);
+    $nama = escape($nama);
+    $pass = escape($pass);
     
     $pass = password_hash($pass, PASSWORD_DEFAULT);
     $query = "INSERT INTO `users` (`username`, `password`) VALUES ('$nama', '$pass')";
@@ -23,35 +23,14 @@ function register_user($nama, $pass) {
 
 }
 
-// mengui nama kembar
-function register_cek_nama($nama) {
+function cek_nama($nama){
     global $link;
-    $nama = mysqli_real_escape_string($link, $nama);
+    $nama = escape($nama);
 
     $query = "SELECT * FROM users WHERE username = '$nama'";
 
     if( $result = mysqli_query($link, $query) ) {
-        if( mysqli_num_rows($result) == 0 ) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-}
-
-// menguji nama di database
-function login_cek_nama($nama) {
-    global $link;
-    $nama = mysqli_real_escape_string($link, $nama);
-
-    $query = "SELECT * FROM users WHERE username = '$nama'";
-
-    if( $result = mysqli_query($link, $query) ) {
-        if( mysqli_num_rows($result) != 0 ) { // jika namanya nggak kosong jika hasil ini selain 0 hasilnya true
-            return true;
-        } else {
-            return false;
-        }
+        return mysqli_num_rows($result);
     }
 }
 
@@ -60,8 +39,8 @@ function cek_data($nama, $pass) {
     global $link;
 
     // mencegah slq injection
-    $nama = mysqli_real_escape_string($link, $nama);
-    $pass = mysqli_real_escape_string($link, $pass);
+    $nama = escape($nama);
+    $pass = escape($pass);
 
     $query = "SELECT `password` FROM `users` WHERE username = '$nama'";
     $result = mysqli_query($link, $query);
@@ -77,5 +56,17 @@ function cek_data($nama, $pass) {
     }
 
 } 
+
+// mencegah injection
+function escape($data) {
+    global $link;
+    return mysqli_real_escape_string($link, $data);
+}
+
+// 
+function redirect_login($nama) {
+    $_SESSION['user'] = $nama;
+    header('Location: index.php');
+}
 
 ?>
