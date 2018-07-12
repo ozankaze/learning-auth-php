@@ -66,10 +66,10 @@ function cek_data($nama, $pass) {
     $query = "SELECT `password` FROM `users` WHERE username = '$nama'";
     $result = mysqli_query($link, $query);
     // print_r($result);
-    $hash = mysqli_fetch_assoc($result); // hasilnya array mysqli_fetch_assoc()
+    $hash = mysqli_fetch_assoc($result)['password']; // hasilnya array mysqli_fetch_assoc()
     // var_dump($hash);die();
     // echo $hash['password'];die();
-    if( password_verify($pass, $hash['password']) ) {
+    if( password_verify($pass, $hash) ) {
         // die('Berhasil');
         return true; 
     } else {
