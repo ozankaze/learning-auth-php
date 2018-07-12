@@ -3,6 +3,8 @@
 require_once('core/init.php');
 require_once('view/header.php');
 
+$error = '';
+
 // redirect kalau user sudah login
 if( isset($_SESSION['user']) ) {
     header('Location: index.php');
@@ -20,16 +22,16 @@ if( isset($_POST['submit']) ) {
         if ( register_cek_nama($nama) ) {
             // memasukan ke database
             if( register_user($nama, $pass) ) {
-                echo 'Berhasil';
+                $error = 'Berhasil';
             } else {
-                echo 'Gagal Daftar';
+                $error = 'Gagal Daftar';
             }
         } else {
-            echo 'Nama Sudah Ada';
+            $error = 'Nama Sudah Ada';
         }
 
     } else {
-        echo 'Nama Tidak Boleh Kosong';
+        $error = 'Nama Tidak Boleh Kosong';
     }
 }
 
@@ -43,6 +45,12 @@ if( isset($_POST['submit']) ) {
     <input type="password" name="password">
     <br><br>
     <button type="submit" name="submit">Daftar</button>
+    <br><br>
+    <?php if( $error != '' ) : ?>
+        <div style="color: red;" id="error">
+            <?php echo $error; ?>
+        </div>
+    <?php endif ?>
 </form>
 
 

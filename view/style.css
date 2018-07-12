@@ -20,3 +20,7 @@ footer {
     padding: 5px;
     padding-top: 20px;
 }
+
+#error {
+    color: red;
+}
