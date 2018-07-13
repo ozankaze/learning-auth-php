@@ -34,6 +34,10 @@ if( isset($_POST['submit']) ) {
     }
 }
 
+// menguji pesan session
+if( isset($_SESSION['msg']) ) {
+    flash_delete($_SESSION['msg']);
+}
 ?>
 
 <form action="login.php" method="post">

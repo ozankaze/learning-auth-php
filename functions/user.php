@@ -69,4 +69,11 @@ function redirect_login($nama) {
     header('Location: index.php');
 }
 
+function flash_delete($nama) {
+    if( isset($_SESSION['msg']) ) {
+        echo $_SESSION['msg'];
+        unset($_SESSION['msg']);
+    }
+}
+
 ?>
