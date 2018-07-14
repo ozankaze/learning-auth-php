@@ -76,4 +76,23 @@ function flash_delete($nama) {
     }
 }
 
+// menguji status user
+function cek_status($nama) {
+    global $link;
+    $nama = escape($nama);
+
+    $query = "SELECT `role` FROM users WHERE username='$nama'";
+
+    $result = mysqli_query($link, $query);
+    $query = mysqli_fetch_assoc($result)['role'];
+    // var_dump($query);die();
+    if( $query == 1 ) {
+        return true;
+    } else {
+        return false;
+    }
+    // return $query; 
+
+}
+
 ?>

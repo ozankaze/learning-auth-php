@@ -12,6 +12,8 @@ if( !isset($_SESSION['user']) ) {
 
 <h1>Selamat Datang <?php echo $_SESSION['user']; ?></h1>
 
-
+<?php if( cek_status($_SESSION['user']) ) : ?>
+    <div>Hallo Admin</div>
+<?php endif ?>
 
 <?php require_once('view/footer.php') ?>
